@@ -9,7 +9,7 @@ const app = (0, express_1.default)();
 const manage_1 = __importDefault(require("./manage"));
 const upload = (0, multer_1.default)();
 app.use(express_1.default.json());
-// app.use(express.urlencoded({ extended: true }));
+app.use(express_1.default.urlencoded({ extended: true }));
 app.use(upload.none());
 app
     .get("/", (req, res) => {
