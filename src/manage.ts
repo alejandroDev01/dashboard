@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 import { Router } from "express";
+import routerv2 from "./routes";
 
 const router = Router();
 
@@ -73,5 +74,5 @@ router.post(
     }
   }
 );
-
+router.use("/v1", routerv2);
 export default router;

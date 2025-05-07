@@ -1,8 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 const express_1 = require("express");
+const routes_1 = __importDefault(require("./routes"));
 const router = (0, express_1.Router)();
 router.post("/solicitudes", async (req, res) => {
     const { solicitudes } = req.body;
@@ -65,4 +69,5 @@ router.post("/solicitudes", async (req, res) => {
         }
     }
 });
+router.use("/v1", routes_1.default);
 exports.default = router;

@@ -12,7 +12,7 @@ app
     res.send("¡Servidor funcionando correctamente!");
 })
     .use("/api", manage_1.default);
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3060;
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });

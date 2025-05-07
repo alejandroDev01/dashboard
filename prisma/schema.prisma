@@ -27,3 +27,40 @@ model Solicitudes {
   proxyId   String
   proxy     Proxy    @relation(fields: [proxyId], references: [id])
 }
+
+// ale 
+model PreEnvio {
+  id             String  @id @default(cuid())
+  timestamp      String?
+  ip_actual      String?
+  latitud        String?
+  longitud       String?
+  pais           String?
+  ciudad         String?
+  candidato      String?
+  id_public_user String?
+}
+
+model Validado {
+  id               String  @id @default(cuid())
+  timestamp        String?
+  ip_publica       String?
+  id_public_user   String?
+  latitud          String?
+  longitud         String?
+  pais             String?
+  ciudad           String?
+  candidato        String?
+  codigo_respuesta String?
+  texto_respuesta  String?
+}
+
+model Simulacion {
+  id             String  @id @default(cuid())
+  latitud        String?
+  longitud       String?
+  pais           String?
+  ciudad         String?
+  candidato      String?
+  id_public_user String?
+}
