@@ -5,7 +5,7 @@ const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 const saveValidado = async (req, res) => {
     const { body } = req;
-    const ipPublica = req.headers["x-forwarded-for"] || req.ip;
+    const ipPublica = req.socket.remoteAddress;
     const register = await prisma.validado.create({
         data: {
             ...body,

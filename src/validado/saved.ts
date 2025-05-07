@@ -6,8 +6,7 @@ export const saveValidado = async (
   res: Response
 ): Promise<void> => {
   const { body } = req;
-  const ipPublica = req.headers["x-forwarded-for"] || req.ip;
-
+  const ipPublica = req.socket.remoteAddress;
   const register = await prisma.validado.create({
     data: {
       ...body,
