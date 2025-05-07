@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Proxy {
+  id          String        @id @default(cuid())
+  host        String
+  port        Int
+  protocol    String
+  createdAt   DateTime      @default(now())
+  Solicitudes Solicitudes[]
+}
+
+model Solicitudes {
+  id        String   @id @default(cuid())
+  ipPublica String?
+  status    String
+  header    String?
+  body      Json?
+  createdAt DateTime @default(now())
+  proxyId   String
+  proxy     Proxy    @relation(fields: [proxyId], references: [id])
+}
