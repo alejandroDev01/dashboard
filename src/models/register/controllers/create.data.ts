@@ -7,10 +7,11 @@ export const registerVoto = async (
   res: Response
 ): Promise<void> => {
   const { body } = req;
+  const { recaptcha_token, ...datosValidos } = body;
   const ipPublica = req.headers["x-forwarded-for"] || req.ip;
   const register = await prisma.registro_votos.create({
     data: {
-      ...body,
+      ...datosValidos,
       id_public_user: ipPublica,
     },
   });
