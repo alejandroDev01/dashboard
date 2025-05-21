@@ -8,15 +8,25 @@ const multer_1 = __importDefault(require("multer"));
 const app = (0, express_1.default)();
 const manage_1 = __importDefault(require("./manage"));
 const upload = (0, multer_1.default)();
+app.use((req, res, next) => {
+    const ipInfo = {
+        "x-forwarded-for": req.headers["x-forwarded-for"] || "no disponible",
+        "x-real-ip": req.headers["x-real-ip"] || "no disponible",
+        remoteAddress: req.socket.remoteAddress || "no disponible",
+        "cf-connecting-ip": req.headers["cf-connecting-ip"] || "no disponible",
+        "true-client-ip": req.headers["true-client-ip"] || "no disponible",
+        "x-client-ip": req.headers["x-client-ip"] || "no disponible",
+        forwarded: req.headers["forwarded"] || "no disponible",
+    };
+    console.log("Información de IP del cliente:", JSON.stringify(ipInfo, null, 2));
+    next();
+});
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(upload.none());
-app
-    .get("/", (req, res) => {
-    res.send("¡Servidor funcionando correctamente!");
-})
-    .use("/api", manage_1.default);
+app.use(manage_1.default);
 const PORT = process.env.PORT || 3060;
-app.listen(PORT, () => {
+app.listen(3060, "0.0.0.0", () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    console.log(`También accesible en http://0.0.0.0:${PORT}`);
 });
