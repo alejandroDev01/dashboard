@@ -13,12 +13,13 @@ app.use((req, res, next) => {
     "true-client-ip": req.headers["true-client-ip"] || "no disponible",
     "x-client-ip": req.headers["x-client-ip"] || "no disponible",
     forwarded: req.headers["forwarded"] || "no disponible",
+    referer: req.headers.referer || "no disponible",
+    origin: req.headers.origin || "no disponible",
+    host: req.headers.host || "no disponible",
+    userAgent: req.headers["user-agent"] || "no disponible",
   };
 
-  console.log(
-    "Información de IP del cliente:",
-    JSON.stringify(ipInfo, null, 2)
-  );
+  console.log("Información del cliente:", JSON.stringify(ipInfo, null, 2));
   next();
 });
 
