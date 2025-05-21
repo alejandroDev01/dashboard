@@ -43,3 +43,10 @@ enum tipo {
   VOTO_GERACION_TOKEN_ALEATORIA
   SIMULACION
 }
+
+model Token {
+  id        String   @id @default(cuid())
+  token     String
+  estado    Boolean
+  createdAt DateTime @default(now())
+}
