@@ -5,10 +5,11 @@ const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 const registerVoto = async (req, res) => {
     const { body } = req;
+    const { recaptcha_token, ...datosValidos } = body;
     const ipPublica = req.headers["x-forwarded-for"] || req.ip;
     const register = await prisma.registro_votos.create({
         data: {
-            ...body,
+            ...datosValidos,
             id_public_user: ipPublica,
         },
     });
