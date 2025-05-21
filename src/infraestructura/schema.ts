@@ -34,3 +34,6 @@ export const registroVotosSchema = z.object({
 });
 
 export type RegistroVotos = z.infer<typeof registroVotosSchema>;
+export const registroVotosSchemaALl = z.object({
+  registros: z.array(registroVotosSchema),
+});

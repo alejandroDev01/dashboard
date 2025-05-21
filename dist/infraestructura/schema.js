@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.registroVotosSchema = exports.tipoEnum = exports.metodoEnum = void 0;
+exports.registroVotosSchemaALl = exports.registroVotosSchema = exports.tipoEnum = exports.metodoEnum = void 0;
 const zod_1 = require("zod");
 exports.metodoEnum = zod_1.z.enum(["TUXLER", "MODO_AVION"]);
 exports.tipoEnum = zod_1.z.enum([
@@ -31,4 +31,7 @@ exports.registroVotosSchema = zod_1.z.object({
     metodo: exports.metodoEnum,
     refer_envio: zod_1.z.string().optional(),
     token_refer: zod_1.z.string().optional(),
+});
+exports.registroVotosSchemaALl = zod_1.z.object({
+    registros: zod_1.z.array(exports.registroVotosSchema),
 });
