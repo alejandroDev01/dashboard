@@ -25,6 +25,13 @@ app.use((req, res, next) => {
     console.log("Información del cliente:", JSON.stringify(ipInfo, null, 2));
     next();
 });
+app.get("/", (req, res) => {
+    res.status(200).json({
+        status: "OK",
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime(),
+    });
+});
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(upload.none());
