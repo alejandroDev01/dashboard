@@ -34,4 +34,4 @@ RUN npx prisma generate
 ENV TZ=America/La_Paz
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-CMD ["node", "dist/index.js"]
+CMD npx prisma migrate deploy && node dist/index.js
