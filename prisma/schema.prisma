@@ -22,12 +22,12 @@ model registro_votos {
   pais             String?
   ciudad           String?
   candidato        String?
-  tipo             tipo
+  tipo             tipo?
   token_solicutd   String?
   codigo_respuesta String?
   respuesta        String?
   id_dispositivo   String?
-  metodo           metodo
+  metodo           metodo?
   refer_envio      String?
   token_refer      String?
 }

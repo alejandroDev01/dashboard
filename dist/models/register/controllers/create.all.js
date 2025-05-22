@@ -13,7 +13,6 @@ const registerVotoAll = async (req, res) => {
             });
             return;
         }
-        // Validar cada registro con Zod
         const validaciones = registros.map((registro) => {
             try {
                 return schema_1.registroVotosSchema.parse(registro);
@@ -22,7 +21,6 @@ const registerVotoAll = async (req, res) => {
                 return null;
             }
         });
-        // Verificar si hay registros inválidos
         const registrosInvalidos = validaciones.filter((v) => v === null).length;
         if (registrosInvalidos > 0) {
             res.status(400).json({
@@ -30,14 +28,33 @@ const registerVotoAll = async (req, res) => {
             });
             return;
         }
-        // Crear todos los registros en la base de datos
         const ipPublica = String(req.headers["x-forwarded-for"] || req.ip);
         const resultados = await prisma.registro_votos.createMany({
             data: validaciones
                 .filter((v) => v !== null)
                 .map((registro) => ({
                 ...registro,
+                metodo: registro.metodo || null,
                 id_public_user: ipPublica,
+                tipo: registro.tipo || null,
+                timestamp: registro.timestamp || null,
+                ip_publica: registro.ip_publica || null,
+                numero: registro.numero || null,
+                latitud: registro.latitud || null,
+                longitud: registro.longitud || null,
+                ci: registro.ci || null,
+                dia_nacimiento: registro.dia_nacimiento || null,
+                mes_nacimiento: registro.mes_nacimiento || null,
+                anio_nacimiento: registro.anio_nacimiento || null,
+                pais: registro.pais || null,
+                ciudad: registro.ciudad || null,
+                candidato: registro.candidato || null,
+                token_solicutd: registro.token_solicutd || null,
+                codigo_respuesta: registro.codigo_respuesta || null,
+                respuesta: registro.respuesta || null,
+                id_dispositivo: registro.id_dispositivo || null,
+                refer_envio: registro.refer_envio || null,
+                token_refer: registro.token_refer || null,
             })),
         });
         res.status(200).json({
