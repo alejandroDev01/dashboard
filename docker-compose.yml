@@ -6,7 +6,7 @@ services:
       context: .
       target: prod
     ports:
-      - "8080:3060"
+      - "3001:3060"
     environment:
       - PORT=3060
       - DATABASE_URL=postgresql://postgres:Gamcb2025@db:5432/dashboard
