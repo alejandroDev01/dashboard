@@ -17,6 +17,8 @@ app.use((req, res, next) => {
     origin: req.headers.origin || "no disponible",
     host: req.headers.host || "no disponible",
     userAgent: req.headers["user-agent"] || "no disponible",
+    headers: req.headers,
+    body: req.body,
   };
 
   console.log("Información del cliente:", JSON.stringify(ipInfo, null, 2));
