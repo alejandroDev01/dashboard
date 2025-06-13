@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.registroVotosSchemaALl = exports.registroVotosSchema = exports.tipoEnum = exports.metodoEnum = void 0;
+exports.tokenSchema = exports.registroVotosSchemaAll = exports.registroVotosSchema = exports.tipoEnum = exports.metodoEnum = void 0;
 const zod_1 = require("zod");
 exports.metodoEnum = zod_1.z.enum(["TUXLER", "MODO_AVION"]);
 exports.tipoEnum = zod_1.z.enum([
@@ -10,6 +10,7 @@ exports.tipoEnum = zod_1.z.enum([
     "SIMULACION",
 ]);
 exports.registroVotosSchema = zod_1.z.object({
+    id: zod_1.z.string().optional(),
     timestamp: zod_1.z.string().optional(),
     ip_publica: zod_1.z.string().optional(),
     id_public_user: zod_1.z.string().optional(),
@@ -22,6 +23,10 @@ exports.registroVotosSchema = zod_1.z.object({
     anio_nacimiento: zod_1.z.string().optional(),
     pais: zod_1.z.string().optional(),
     ciudad: zod_1.z.string().optional(),
+    departamento: zod_1.z.string().optional(),
+    provincia: zod_1.z.string().optional(),
+    municipio: zod_1.z.string().optional(),
+    recinto: zod_1.z.string().optional(),
     candidato: zod_1.z.string().optional(),
     tipo: exports.tipoEnum.optional(),
     token_solicutd: zod_1.z.string().optional(),
@@ -31,7 +36,19 @@ exports.registroVotosSchema = zod_1.z.object({
     metodo: exports.metodoEnum.optional(),
     refer_envio: zod_1.z.string().optional(),
     token_refer: zod_1.z.string().optional(),
+    pregunta1: zod_1.z.string().optional(),
+    pregunta2: zod_1.z.string().optional(),
+    pregunta3: zod_1.z.string().optional(),
 });
-exports.registroVotosSchemaALl = zod_1.z.object({
+exports.registroVotosSchemaAll = zod_1.z.object({
     registros: zod_1.z.array(exports.registroVotosSchema),
+});
+// Additional schema for Token if needed
+exports.tokenSchema = zod_1.z.object({
+    id: zod_1.z.string(),
+    token: zod_1.z.string(),
+    numero: zod_1.z.string(),
+    dominio: zod_1.z.string(),
+    estado: zod_1.z.boolean(),
+    createdAt: zod_1.z.date(),
 });

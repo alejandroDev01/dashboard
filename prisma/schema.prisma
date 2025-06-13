@@ -21,6 +21,10 @@ model registro_votos {
   anio_nacimiento  String?
   pais             String?
   ciudad           String?
+  departamento     String?
+  provincia        String?
+  municipio        String?
+  recinto          String?
   candidato        String?
   tipo             tipo?
   token_solicutd   String?
@@ -30,6 +34,9 @@ model registro_votos {
   metodo           metodo?
   refer_envio      String?
   token_refer      String?
+  pregunta1        String?
+  pregunta2        String?
+  pregunta3        String?
 }
 
 enum metodo {
@@ -47,6 +54,8 @@ enum tipo {
 model Token {
   id        String   @id @default(cuid())
   token     String
+  numero    String
+  dominio   String
   estado    Boolean
   createdAt DateTime @default(now())
 }

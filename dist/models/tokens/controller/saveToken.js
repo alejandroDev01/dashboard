@@ -6,28 +6,29 @@ const prisma = new client_1.PrismaClient();
 const GuardadoToken = async (req, res) => {
     try {
         const { tokens } = req.body;
-        // Verificar si tokens es un array
         if (!Array.isArray(tokens)) {
             res.status(400).json({
                 msg: "El formato debe ser un array de tokens",
             });
             return;
         }
-        // Crear el array de objetos para la inserción masiva
-        const tokensData = tokens.map((token) => ({
-            token: token,
+        const tokensData = tokens.map((tokenObj) => ({
+            token: tokenObj.token,
+            numero: tokenObj.numero,
+            dominio: tokenObj.dominio,
             estado: true,
         }));
-        // Guardar todos los tokens de forma simultánea
+        for (const token of tokensData) {
+            if (!token.token || !token.numero || !token.dominio) {
+                res.status(400).json({
+                    msg: "Cada token debe tener los campos: token, numero y dominio",
+                });
+                return;
+            }
+        }
         const resultado = await prisma.token.createMany({
             data: tokensData,
         });
-        if (!resultado) {
-            res.status(400).json({
-                msg: "No se pudieron guardar los tokens",
-            });
-            return;
-        }
         res.status(200).json({
             msg: `Se almacenaron ${resultado.count} tokens correctamente`,
             tokens_guardados: resultado.count,
@@ -37,7 +38,11 @@ const GuardadoToken = async (req, res) => {
         console.error("Error al guardar tokens:", error);
         res.status(500).json({
             msg: "Error interno al procesar los tokens",
+            error: error instanceof Error ? error.message : "Error desconocido",
         });
+    }
+    finally {
+        await prisma.$disconnect();
     }
 };
 exports.GuardadoToken = GuardadoToken;

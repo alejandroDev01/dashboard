@@ -10,6 +10,7 @@ export const tipoEnum = z.enum([
 ]);
 
 export const registroVotosSchema = z.object({
+  id: z.string().optional(),
   timestamp: z.string().optional(),
   ip_publica: z.string().optional(),
   id_public_user: z.string().optional(),
@@ -22,6 +23,10 @@ export const registroVotosSchema = z.object({
   anio_nacimiento: z.string().optional(),
   pais: z.string().optional(),
   ciudad: z.string().optional(),
+  departamento: z.string().optional(),
+  provincia: z.string().optional(),
+  municipio: z.string().optional(),
+  recinto: z.string().optional(),
   candidato: z.string().optional(),
   tipo: tipoEnum.optional(),
   token_solicutd: z.string().optional(),
@@ -31,9 +36,25 @@ export const registroVotosSchema = z.object({
   metodo: metodoEnum.optional(),
   refer_envio: z.string().optional(),
   token_refer: z.string().optional(),
+  pregunta1: z.string().optional(),
+  pregunta2: z.string().optional(),
+  pregunta3: z.string().optional(),
 });
 
 export type RegistroVotos = z.infer<typeof registroVotosSchema>;
-export const registroVotosSchemaALl = z.object({
+
+export const registroVotosSchemaAll = z.object({
   registros: z.array(registroVotosSchema),
 });
+
+// Additional schema for Token if needed
+export const tokenSchema = z.object({
+  id: z.string(),
+  token: z.string(),
+  numero: z.string(),
+  dominio: z.string(),
+  estado: z.boolean(),
+  createdAt: z.date(),
+});
+
+export type Token = z.infer<typeof tokenSchema>;
