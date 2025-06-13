@@ -43,7 +43,6 @@ exports.registroVotosSchema = zod_1.z.object({
 exports.registroVotosSchemaAll = zod_1.z.object({
     registros: zod_1.z.array(exports.registroVotosSchema),
 });
-// Additional schema for Token if needed
 exports.tokenSchema = zod_1.z.object({
     id: zod_1.z.string(),
     token: zod_1.z.string(),

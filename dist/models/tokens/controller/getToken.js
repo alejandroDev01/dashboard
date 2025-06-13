@@ -9,6 +9,11 @@ const GetToken = async (req, res) => {
             where: {
                 estado: true,
             },
+            select: {
+                id: true,
+                token: true,
+                numero: true,
+            },
             orderBy: {
                 createdAt: "asc",
             },
