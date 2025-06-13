@@ -47,7 +47,6 @@ export const registroVotosSchemaAll = z.object({
   registros: z.array(registroVotosSchema),
 });
 
-// Additional schema for Token if needed
 export const tokenSchema = z.object({
   id: z.string(),
   token: z.string(),
