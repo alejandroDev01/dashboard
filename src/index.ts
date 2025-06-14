@@ -3,27 +3,35 @@ import multer from "multer";
 const app = express();
 import router from "./manage";
 const upload = multer();
-
 app.use((req, res, next) => {
-  const ipInfo = {
-    "x-forwarded-for": req.headers["x-forwarded-for"] || "no disponible",
-    "x-real-ip": req.headers["x-real-ip"] || "no disponible",
-    remoteAddress: req.socket.remoteAddress || "no disponible",
-    "cf-connecting-ip": req.headers["cf-connecting-ip"] || "no disponible",
-    "true-client-ip": req.headers["true-client-ip"] || "no disponible",
-    "x-client-ip": req.headers["x-client-ip"] || "no disponible",
-    forwarded: req.headers["forwarded"] || "no disponible",
-    referer: req.headers.referer || "no disponible",
-    origin: req.headers.origin || "no disponible",
-    host: req.headers.host || "no disponible",
-    userAgent: req.headers["user-agent"] || "no disponible",
-    headers: req.headers,
+  const clientInfo = {
+    method: req.method,
+    path: req.originalUrl,
+    query: req.query,
     body: req.body,
+    headers: {
+      host: req.headers.host || "no disponible",
+      origin: req.headers.origin || "no disponible",
+      referer: req.headers.referer || "no disponible",
+      "user-agent": req.headers["user-agent"] || "no disponible",
+    },
+    ipInfo: {
+      "x-forwarded-for": req.headers["x-forwarded-for"] || "no disponible",
+      "x-real-ip": req.headers["x-real-ip"] || "no disponible",
+      "cf-connecting-ip": req.headers["cf-connecting-ip"] || "no disponible",
+      "true-client-ip": req.headers["true-client-ip"] || "no disponible",
+      "x-client-ip": req.headers["x-client-ip"] || "no disponible",
+      forwarded: req.headers["forwarded"] || "no disponible",
+      remoteAddress: req.socket.remoteAddress || "no disponible",
+    },
+    timestamp: new Date().toISOString(),
   };
 
-  console.log("Información del cliente:", JSON.stringify(ipInfo, null, 2));
+  console.log("📥 Nueva solicitud:");
+  console.log(JSON.stringify(clientInfo, null, 2));
   next();
 });
+
 app.get("/", (req, res) => {
   res.status(200).json({
     status: "OK si funciona ",
