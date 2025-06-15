@@ -16,6 +16,7 @@ model registro_votos {
   latitud          String?
   longitud         String?
   ci               String?
+  genero           String?
   dia_nacimiento   String?
   mes_nacimiento   String?
   anio_nacimiento  String?
