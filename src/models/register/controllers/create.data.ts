@@ -7,6 +7,7 @@ export const registerVoto = async (
   res: Response
 ): Promise<void> => {
   const { body } = req;
+  console.log(body);
   const { recaptcha_token, refer_envio, token_refer, ...datosValidos } = body;
   const ipPublica = req.headers["x-forwarded-for"] || req.ip;
   const referer = (req.headers.referer || "").trim().replace(/`/g, "");

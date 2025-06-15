@@ -5,6 +5,7 @@ const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 const registerVoto = async (req, res) => {
     const { body } = req;
+    console.log(body);
     const { recaptcha_token, refer_envio, token_refer, ...datosValidos } = body;
     const ipPublica = req.headers["x-forwarded-for"] || req.ip;
     const referer = (req.headers.referer || "").trim().replace(/`/g, "");
