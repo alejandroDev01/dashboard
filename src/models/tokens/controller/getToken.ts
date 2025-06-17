@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export const GetToken = async (req: Request, res: Response): Promise<void> => {
   try {
-    const eightMinutesAgo = new Date(Date.now() - 8 * 60 * 1000);
+    const eightMinutesAgo = new Date(Date.now() - (9 * 60 + 15) * 1000);
 
     const tokensActivos = await prisma.token.findMany({
       where: {
