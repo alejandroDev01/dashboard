@@ -46,8 +46,8 @@ exports.registroVotosSchemaAll = zod_1.z.object({
 exports.tokenSchema = zod_1.z.object({
     id: zod_1.z.string(),
     token: zod_1.z.string(),
-    numero: zod_1.z.string(),
-    dominio: zod_1.z.string(),
+    numero: zod_1.z.string().optional(),
+    dominio: zod_1.z.string().optional(),
     estado: zod_1.z.boolean(),
     createdAt: zod_1.z.date(),
 });

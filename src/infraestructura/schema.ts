@@ -50,8 +50,8 @@ export const registroVotosSchemaAll = z.object({
 export const tokenSchema = z.object({
   id: z.string(),
   token: z.string(),
-  numero: z.string(),
-  dominio: z.string(),
+  numero: z.string().optional(),
+  dominio: z.string().optional(),
   estado: z.boolean(),
   createdAt: z.date(),
 });

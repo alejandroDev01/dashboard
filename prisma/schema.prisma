@@ -55,8 +55,8 @@ enum tipo {
 model Token {
   id        String   @id @default(cuid())
   token     String
-  numero    String
-  dominio   String
+  numero    String?
+  dominio   String?
   estado    Boolean
   createdAt DateTime @default(now())
 }
