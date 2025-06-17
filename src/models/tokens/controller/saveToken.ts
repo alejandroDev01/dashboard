@@ -24,15 +24,6 @@ export const GuardadoToken = async (
       estado: true,
     }));
 
-    for (const token of tokensData) {
-      if (!token.token || !token.numero || !token.dominio) {
-        res.status(400).json({
-          msg: "Cada token debe tener los campos: token, numero y dominio",
-        });
-        return;
-      }
-    }
-
     const resultado = await prisma.token.createMany({
       data: tokensData,
     });
