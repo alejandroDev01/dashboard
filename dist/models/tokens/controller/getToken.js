@@ -40,9 +40,13 @@ const GetToken = async (req, res) => {
                 estado: false,
             },
         });
+        const dataConNumeroSeguro = tokensActivos.map((token) => ({
+            ...token,
+            numero: token.numero ?? "",
+        }));
         res.status(200).json({
-            msg: `Se obtuvieron ${tokensActivos.length} tokens (5 con números generados) y se marcaron como usados`,
-            data: tokensActivos,
+            msg: `Se obtuvieron ${dataConNumeroSeguro.length} token(s)`,
+            data: dataConNumeroSeguro,
         });
     }
     catch (error) {
