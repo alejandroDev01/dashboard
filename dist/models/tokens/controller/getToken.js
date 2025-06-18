@@ -21,7 +21,7 @@ const GetToken = async (req, res) => {
                 token: true,
                 numero: true,
             },
-            take: 10,
+            take: 2,
         });
         if (!tokensActivos || tokensActivos.length === 0) {
             res.status(404).json({

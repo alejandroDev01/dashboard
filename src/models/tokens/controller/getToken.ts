@@ -21,7 +21,7 @@ export const GetToken = async (req: Request, res: Response): Promise<void> => {
         token: true,
         numero: true,
       },
-      take: 10,
+      take: 2,
     });
 
     if (!tokensActivos || tokensActivos.length === 0) {
