@@ -5,12 +5,15 @@ const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 const GetToken = async (req, res) => {
     try {
-        const eightMinutesAgo = new Date(Date.now() - (9 * 60 + 15) * 1000);
-        const tokensActivos = await prisma.token.findMany({
+        const { IP, MASIVO, MIXTO } = req.query;
+        const isMasivo = MASIVO === "true";
+        const isMixto = MIXTO === "true";
+        const timeLimit = new Date(Date.now() - (9 * 60 + 15) * 1000);
+        const tokensDisponibles = await prisma.token.findMany({
             where: {
                 estado: true,
                 createdAt: {
-                    gte: eightMinutesAgo,
+                    gte: timeLimit,
                 },
             },
             orderBy: {
@@ -21,31 +24,34 @@ const GetToken = async (req, res) => {
                 token: true,
                 numero: true,
             },
-            take: 2,
         });
-        if (!tokensActivos || tokensActivos.length === 0) {
+        if ((isMasivo || isMixto) && tokensDisponibles.length < 20) {
+            res.status(400).json({
+                msg: "No hay tokens suficientes disponibles para operación masiva/mixta. Se requieren al menos 20 tokens.",
+            });
+            return;
+        }
+        if (tokensDisponibles.length === 0) {
             res.status(404).json({
                 msg: "No se encontraron tokens disponibles",
             });
             return;
         }
-        const tokenIds = tokensActivos.map((token) => token.id);
-        await prisma.token.updateMany({
+        const tokenATomar = tokensDisponibles[0];
+        await prisma.token.update({
             where: {
-                id: {
-                    in: tokenIds,
-                },
+                id: tokenATomar.id,
             },
             data: {
                 estado: false,
             },
         });
-        const dataConNumeroSeguro = tokensActivos.map((token) => ({
-            ...token,
-            numero: token.numero ?? "",
-        }));
+        const dataConNumeroSeguro = {
+            ...tokenATomar,
+            numero: tokenATomar.numero ?? "",
+        };
         res.status(200).json({
-            msg: `Se obtuvieron ${dataConNumeroSeguro.length} token(s)`,
+            msg: "Token obtenido exitosamente",
             data: dataConNumeroSeguro,
         });
     }
