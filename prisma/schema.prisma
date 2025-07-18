@@ -32,7 +32,7 @@ model registro_votos {
   codigo_respuesta String?
   respuesta        String?
   id_dispositivo   String?
-  metodo           metodo?
+  metodo           String?
   refer_envio      String?
   token_refer      String?
   pregunta1        String?
