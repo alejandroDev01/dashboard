@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const multer_1 = __importDefault(require("multer"));
 const app = (0, express_1.default)();
 const manage_1 = __importDefault(require("./manage"));
+const generate_1 = require("./infraestructura/generate");
 const upload = (0, multer_1.default)();
 app.use((req, res, next) => {
     const clientInfo = {
@@ -46,6 +47,8 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(upload.none());
 app.use(manage_1.default);
+const token = (0, generate_1.generarTokenManual)();
+console.log(token);
 const PORT = process.env.PORT || 3060;
 app.listen(3060, "0.0.0.0", () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);

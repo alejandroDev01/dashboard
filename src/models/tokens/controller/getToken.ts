@@ -1,12 +1,12 @@
 import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
+import { generarTokenManual } from "../../../infraestructura/generate";
 
 const prisma = new PrismaClient();
 
 export const GetToken = async (req: Request, res: Response): Promise<void> => {
   try {
     const { IP, MASIVO, MIXTO } = req.query;
-
     const isMasivo = MASIVO === "true";
     const isMixto = MIXTO === "true";
 

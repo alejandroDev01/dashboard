@@ -2,6 +2,7 @@ import express from "express";
 import multer from "multer";
 const app = express();
 import router from "./manage";
+import { generarTokenManual } from "./infraestructura/generate";
 const upload = multer();
 app.use((req, res, next) => {
   const clientInfo = {
@@ -43,6 +44,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(upload.none());
 app.use(router);
+
+const token = generarTokenManual();
+console.log(token);
 const PORT = process.env.PORT || (3060 as number);
 app.listen(3060, "0.0.0.0", () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
