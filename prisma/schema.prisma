@@ -27,7 +27,7 @@ model registro_votos {
   municipio        String?
   recinto          String?
   candidato        String?
-  tipo             tipo?
+  tipo             String?
   token_solicutd   String?
   codigo_respuesta String?
   respuesta        String?
