@@ -8,13 +8,13 @@ const GetToken = async (req, res) => {
         const { IP, MASIVO, MIXTO } = req.query;
         const isMasivo = MASIVO === "true";
         const isMixto = MIXTO === "true";
-        // const timeLimit = new Date(Date.now() - (9 * 60 + 15) * 1000);
+        const timeLimit = new Date(Date.now() - 6 * 60 * 1000);
         const tokensDisponibles = await prisma.token.findMany({
             where: {
                 estado: true,
-                // createdAt: {
-                //   gte: timeLimit,
-                // },
+                createdAt: {
+                    gte: timeLimit,
+                },
             },
             orderBy: {
                 createdAt: "desc",

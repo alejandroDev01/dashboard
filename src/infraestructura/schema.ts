@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const metodoEnum = z.enum(["TUXLER", "MODO_AVION"]);
+// export const metodoEnum = z.enum(["TUXLER", "MODO_AVION"]);
 
 export const tipoEnum = z.enum([
   "PRE_ENVIO",
@@ -33,7 +33,7 @@ export const registroVotosSchema = z.object({
   codigo_respuesta: z.string().optional(),
   respuesta: z.string().optional(),
   id_dispositivo: z.string().optional(),
-  metodo: metodoEnum.optional(),
+  metodo: z.string().optional(),
   refer_envio: z.string().optional(),
   token_refer: z.string().optional(),
   pregunta1: z.string().optional(),
