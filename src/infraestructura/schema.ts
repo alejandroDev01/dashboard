@@ -28,7 +28,7 @@ export const registroVotosSchema = z.object({
   municipio: z.string().optional(),
   recinto: z.string().optional(),
   candidato: z.string().optional(),
-  tipo: tipoEnum.optional(),
+  tipo: z.string().optional(),
   token_solicutd: z.string().optional(),
   codigo_respuesta: z.string().optional(),
   respuesta: z.string().optional(),

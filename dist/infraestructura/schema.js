@@ -28,7 +28,7 @@ exports.registroVotosSchema = zod_1.z.object({
     municipio: zod_1.z.string().optional(),
     recinto: zod_1.z.string().optional(),
     candidato: zod_1.z.string().optional(),
-    tipo: exports.tipoEnum.optional(),
+    tipo: zod_1.z.string().optional(),
     token_solicutd: zod_1.z.string().optional(),
     codigo_respuesta: zod_1.z.string().optional(),
     respuesta: zod_1.z.string().optional(),
